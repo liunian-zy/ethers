@@ -26,7 +26,6 @@ enum EtherUnit {
 
   /// finney, 10^15 wei or 1 mEther
   finney,
-
   ether
 }
 
@@ -77,7 +76,8 @@ class Utils {
       return value;
     }
 
-    return Decimal.parse((value / BigInt.from(10).pow(unit)).toString())
+    return (Decimal.fromBigInt(value) /
+            Decimal.fromBigInt(BigInt.from(10).pow(unit)))
         .toString();
   }
 
@@ -85,7 +85,8 @@ class Utils {
     BigInt value, {
     EtherUnit unit = EtherUnit.ether,
   }) {
-    return Decimal.parse((value / _factors[unit]!).toString()).toString();
+    return (Decimal.fromBigInt(value) / Decimal.fromBigInt(_factors[unit]!))
+        .toString();
   }
 
   formatEther(BigInt value) {
@@ -96,14 +97,16 @@ class Utils {
     String value, {
     int unit = 18,
   }) {
-    return (Decimal.parse(value) * Decimal.ten.pow(unit).toDecimal()).toBigInt();
+    return (Decimal.parse(value) * Decimal.ten.pow(unit).toDecimal())
+        .toBigInt();
   }
 
   parseUnitsByEtherUnit(
     String value, {
     EtherUnit unit = EtherUnit.ether,
   }) {
-    return (Decimal.parse(value) * Decimal.ten.pow(_pows[unit]!).toDecimal()).toBigInt();
+    return (Decimal.parse(value) * Decimal.ten.pow(_pows[unit]!).toDecimal())
+        .toBigInt();
   }
 
   BigInt parseEther(String value) {
