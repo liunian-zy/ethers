@@ -78,7 +78,7 @@ class Utils {
 
     return (Decimal.fromBigInt(value) /
             Decimal.fromBigInt(BigInt.from(10).pow(unit)))
-        .toDouble()
+        .toDecimal()
         .toString();
   }
 
@@ -87,7 +87,7 @@ class Utils {
     EtherUnit unit = EtherUnit.ether,
   }) {
     return (Decimal.fromBigInt(value) / Decimal.fromBigInt(_factors[unit]!))
-        .toDouble()
+        .toDecimal()
         .toString();
   }
 
